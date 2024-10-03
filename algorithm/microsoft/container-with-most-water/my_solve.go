@@ -3,7 +3,7 @@ package main
 // 내가 푼거 (time limit 걸림)
 /**
 푼 방식 : 무차별 대입 방식
-원인 : 시간 복잡도 중첩 루프여서 n2의 복잡도를 나타냄
+원인 : 시간 복잡도 중첩 루프여서 2(n)의 복잡도를 나타냄
 공간 복잡도는 양호
 */
 // func maxArea(height []int) int {
@@ -27,6 +27,14 @@ package main
 // 	return res
 // }
 
+/*
+*
+해결 방법 -> 투 포인터 알고리즘 Two Pointer Algorithm
+
+시간복잡도 0(n)
+
+공간복잡도 0(1)
+*/
 func maxArea(height []int) int {
 	left := 0
 	right := len(height) - 1

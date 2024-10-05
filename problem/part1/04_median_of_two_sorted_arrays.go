@@ -1,7 +1,5 @@
 package main
 
-import "sort"
-
 /**
 4. Median of Two Sorted Arrays
 Hard
@@ -32,17 +30,56 @@ nums2.length == n
 -106 <= nums1[i], nums2[i] <= 106
 */
 
-// 시간 복잡도를 써야하는데 안씀 다시 연구필요 TODO:
+// // 시간 복잡도를 써야하는데 안씀 다시 연구필요 TODO:
+// func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+// 	nums3 := append(nums1, nums2...)
+// 	sort.Ints(nums3)
+// 	var result float64
+// 	if len(nums3)%2 == 0 {
+// 		result := (float64(nums3[len(nums3)/2-1]) + float64(nums3[len(nums3)/2])) / 2.0
+// 		return result
+// 	} else {
+// 		return float64(nums3[len(nums3)/2])
+// 	}
+// 	return result
+// }
 
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-	nums3 := append(nums1, nums2...)
-	sort.Ints(nums3)
-	var result float64
-	if len(nums3)%2 == 0 {
-		result := (float64(nums3[len(nums3)/2-1]) + float64(nums3[len(nums3)/2])) / 2.0
-		return result
-	} else {
-		return float64(nums3[len(nums3)/2])
+	m := len(nums1)
+	n := len(nums2)
+
+	mergeList := make([]int, m+n)
+
+	i, j, z := 0, 0, 0
+
+	for i < m && j < n {
+		if nums1[i] < nums2[j] {
+			mergeList[z] = nums1[i]
+			i++
+		} else {
+			mergeList[z] = nums2[j]
+			j++
+		}
+		z++
 	}
-	return result
+
+	for i < m {
+		mergeList[z] = nums1[i]
+		i++
+		z++
+	}
+
+	for j < n {
+		mergeList[z] = nums2[j]
+		j++
+		z++
+	}
+
+	totalLen := m + n
+
+	if totalLen%2 == 0 {
+		return float64(mergeList[totalLen/2-1]+mergeList[totalLen/2]) / 2.0
+	} else {
+		return float64(mergeList[totalLen/2])
+	}
 }

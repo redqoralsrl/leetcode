@@ -29,10 +29,28 @@ Constraints:
 1 <= people[i] <= limit <= 3 * 104
 */
 
+/*
+*
+시간복잡도 0(n log n) - sort 사용해서
+공간 복잡도 0(n) - sort 사용해서
+*/
 func numRescueBoats(people []int, limit int) int {
 	sort.Ints(people)
-	count := 0
-	for _, data := range people {
+	boat := 0
 
+	heavy := len(people) - 1
+	light := 0
+
+	for light <= heavy {
+		if people[heavy]+people[light] > limit {
+			heavy -= 1
+			boat++
+		} else {
+			heavy -= 1
+			light += 1
+			boat++
+		}
 	}
+
+	return boat
 }

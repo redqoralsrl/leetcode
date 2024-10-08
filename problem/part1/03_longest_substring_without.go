@@ -31,19 +31,24 @@ s consists of English letters, digits, symbols and spaces.
 */
 // 슬라이딩 윈도우 기법
 func lengthOfLongestSubstring(s string) int {
-	answer := make(map[byte]int)
-	maxLen := 0
-	start := 0
+    if len(s) <= 1 {
+        return len(s)
+    }
 
-	for i := 0; i < len(s); i++ {
-		if lastIdx, ok := answer[s[i]]; ok && lastIdx >= start {
-			start = lastIdx + 1
-		}
+    value := make(map[byte]int)
+    max_len := 0
 
-		answer[s[i]] = i
+    left := 0
+    right := 0
+    for left < len(s) && right < len(s) {
+        if index, ok := value[s[right]]; ok {
+            left = max(left, index+1)
+        }
 
-		maxLen = max(maxLen, i-start+1)
-	}
+        value[s[right]] = right
+        max_len = max(max_len, right - left + 1)
+        right++
+    }
 
-	return maxLen
+    return max_len
 }

@@ -32,17 +32,17 @@ Only one valid answer exists.
 Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 */
 func twoSum(nums []int, target int) []int {
-	result := make(map[int]int)
+    value := make(map[int]int) // data -> index
 
-	for index, data := range nums {
-		search := target - nums[index]
+    for idx, data := range nums {
+        find := target - data
 
-		if val, ok := result[search]; ok {
-			return []int{val, index}
-		}
+        if index, ok := value[find]; ok {
+            return []int{index, idx}
+        }
 
-		result[data] = index
-	}
+        value[data] = idx
+    }
 
-	return nil
+    return nil
 }

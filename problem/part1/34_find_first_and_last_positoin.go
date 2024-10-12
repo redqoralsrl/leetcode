@@ -28,6 +28,7 @@ nums is a non-decreasing array.
 -109 <= target <= 109
 */
 
+// 답은 맞으나 시간 복잡도는 O(n)
 func searchRange(nums []int, target int) []int {
     left := 0
     right := len(nums) - 1
@@ -52,3 +53,35 @@ func searchRange(nums []int, target int) []int {
 
     return []int{l, r}
 }
+
+/**
+func binar_search(nums []int, target int, move_left bool) int {
+	l := 0
+	r := len(nums) - 1
+	found_at := -1
+	for l <= r {
+		m := int(float32(l+r) / 2)
+		if nums[m] < target {
+			l = m + 1
+		} else if nums[m] > target {
+			r = m - 1
+		} else {
+			found_at = m
+			if move_left {
+				r = m - 1
+			} else {
+				l = m + 1
+			}
+		}
+	}
+	return found_at
+}
+
+func searchRange(nums []int, target int) []int {
+	left_most := -1
+	right_most := -1
+	left_most = binar_search(nums, target, true)
+	right_most = binar_search(nums, target, false)
+	return []int{left_most, right_most}
+}
+*/
